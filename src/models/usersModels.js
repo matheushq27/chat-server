@@ -6,9 +6,9 @@ const getUsers = async () =>{
 }
 
 const createUsers = async (users) =>{
-    const {name, user, email, password} = users
-    const query = 'INSERT INTO users (name, user, email, password) VALUES (?, ?, ?, ?)'
-    const resp = await connection.execute(query, [name, user, email, password])
+    const {name, surname, user, email, password} = users
+    const query = 'INSERT INTO users (name, surname, user, email, password) VALUES (?, ?, ?, ?, ?)'
+    const resp = await connection.execute(query, [name, surname, user, email, password])
     return resp
 }
 
