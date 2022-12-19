@@ -5,6 +5,16 @@ const getUsers = async () =>{
     return users
 }
 
+const getUsersById = async (id) =>{
+    const users = await connection.execute('SELECT * FROM users WHERE id = ?', [id])
+    return users
+}
+
+const getUsersByUserName = async (userName) =>{
+    const users = await connection.execute('SELECT * FROM users WHERE user = ?', [userName])
+    return users
+}
+
 const createUsers = async (users) =>{
     const {name, surname, user, email, password} = users
     const query = 'INSERT INTO users (name, surname, user, email, password) VALUES (?, ?, ?, ?, ?)'
@@ -24,9 +34,16 @@ const updateCategories = async (id, debts) =>{
     return updateDebt
 }
 
+const login = async (userName, password) =>{
+    const [users] = await connection.execute('SELECT * FROM users WHERE user = ? AND password = ?', [userName, password])
+    return users[0]
+}
 
 
 module.exports = {
     getUsers,
-    createUsers
+    getUsersById,
+    getUsersByUserName,
+    createUsers,
+    login
 }
