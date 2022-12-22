@@ -46,7 +46,7 @@ const login = async (req, res) =>{
     const {user, password} = req.body
     const resp = await usersModel.login(user, password)
     if(resp){
-        return res.status(201).json({id: resp.id})
+        return res.status(201).json({id: resp.id, user: resp.user, name: resp.name, email: resp.email})
     }
     return res.status(201).json({id: ""})
 }
