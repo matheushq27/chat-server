@@ -25,5 +25,17 @@ io.on('connection', (socket)=>{
         console.log(connectUsers)
 
         socket.emit('user-ok', connectUsers)
+        socket.broadcast.emit('list-update',{
+            joined: username,
+            list: connectUsers
+        })
     })
+
+    socket.on('disconnect', function() {
+        connectUsers = connectUsers.filter( u => u != socket.username)
+        socket.broadcast.emit('list-update',{
+            left: socket.username,
+            list: connectUsers
+        })
+    });
 })
